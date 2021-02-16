@@ -3,6 +3,8 @@ import "./App.css";
 import L from "leaflet";
 import icon from "./img/marker.png";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import Navbar from './components/Navbar'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 var myIcon = L.icon({
   iconUrl:
@@ -18,22 +20,31 @@ class App extends Component {
   render() {
     const position = [-20.46403580086792, -54.616372827674134];
     return (
-      <MapContainer
-        className="map"
-        center={position}
-        zoom={12}
-        scrollWheelZoom={true}
-      >
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={position} icon={myIcon}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable. <br /> {iron}
-          </Popup>
-        </Marker>
-      </MapContainer>
+      <div>
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route path='/' />
+          </Switch>
+          <MapContainer
+            className="map"
+            center={position}
+            zoom={12}
+            scrollWheelZoom={true}
+          >
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={position} icon={myIcon}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable. <br /> {iron}
+              </Popup>
+            </Marker>
+          </MapContainer>
+        </Router>
+      </div>
+
     );
   }
 }
