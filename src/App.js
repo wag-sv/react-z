@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Z from "zabbix-rpc";
 import Map from "./components/Map";
+import Search from "./components/Search";
 
 class App extends Component {
   state = {
@@ -50,6 +52,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <Map hosts={this.state.hosts} />
+        <Search />
       </React.Fragment>
     );
   }

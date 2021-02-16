@@ -1,3 +1,14 @@
-.map {
+#map {
     height: 100vh;
+}
+
+#search {
+    width: 300px;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 499;
+    padding-top: 30px;
 }
