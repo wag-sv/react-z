@@ -2,8 +2,8 @@
     height: 100vh;
 }
 
-#search {
-    width: 300px;
+#panel {
+    width: 350px;
     height: 100vh;
     background-color: rgba(255, 255, 255, 0.7);
     position: absolute;
@@ -14,6 +14,11 @@
 }
 
 .ul-popup {
+    padding: 0px;
+    list-style-type:none;
+}
+
+.ul-panel {
     padding: 0px;
     list-style-type:none;
 }
