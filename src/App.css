@@ -12,3 +12,8 @@
     z-index: 499;
     padding-top: 30px;
 }
+
+.ul-popup {
+    padding: 0px;
+    list-style-type:none;
+}
