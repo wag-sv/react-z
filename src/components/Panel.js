@@ -16,15 +16,22 @@ class Panel extends React.Component {
           </div>
         </form>
         <div className="container">
-          <ul className="ul-panel">
-            {this.props.filteredHosts.map((host) => {
-              return (
-                <li key={host.hostid}>
-                  <strong>{host.name}</strong> | {host.interfaces[0].ip}
-                </li>
-              );
-            })}
-          </ul>
+          <div className="list">
+            <ul className="ul-panel">
+              {this.props.filteredHosts.map((host) => {
+                return (
+                  <li key={host.hostid} className="d-flex li-panel span-list">
+                    <div className="size-60">
+                      <span>
+                        <strong>{host.name}</strong>
+                      </span>
+                    </div>
+                    <div>{host.interfaces[0].ip}</div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </div>
     );

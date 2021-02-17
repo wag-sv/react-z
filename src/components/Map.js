@@ -219,8 +219,10 @@ class Map extends Component {
   };
 
   filterHost = (input) => {
-    const filtered = this.state.hosts.filter((host) =>
-      host.name.toLowerCase().includes(input.toLowerCase())
+    const filtered = this.state.hosts.filter(
+      (host) =>
+        host.name.toLowerCase().includes(input.toLowerCase()) ||
+        host.interfaces[0].ip.includes(input)
     );
     this.setState({ filteredHosts: filtered });
   };
@@ -244,7 +246,6 @@ class Map extends Component {
   };
 
   render() {
-    console.log(this.state.input);
     return (
       <React.Fragment>
         <MapContainer
