@@ -3,6 +3,7 @@ import Z from "zabbix-rpc";
 import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import Panel from "./Panel";
+import Info from "./Info";
 import greenMarker from "../img/greenMarker.png";
 import greyMarker from "../img/greyMarker.png";
 import blueMarker from "../img/blueMarker.png";
@@ -261,7 +262,7 @@ class Map extends Component {
           />
 
           {this.state.filteredHosts.map((host) => {
-            let iconColor = this.greenMarker;
+            let iconColor = this.greyMarker;
 
             switch (host.problemSeverity) {
               case "0":
@@ -295,23 +296,7 @@ class Map extends Component {
                 icon={iconColor}
               >
                 <Popup>
-                  <ul className="ul-popup">
-                    <li>{host.name}</li>
-                    <li>{host.interfaces[0].ip}</li>
-                    <li>Latitude: {host.inventory.location_lat}</li>
-                    <li>Longitude: {host.inventory.location_lon}</li>
-                    {host.items.map((item) => {
-                      return (
-                        <li key={item.itemid}>
-                          {item.name}: {item.lastvalue}
-                        </li>
-                      );
-                    })}
-
-                    {host.problems.map((problem) => {
-                      return <li key={problem.eventid}>{problem.name}</li>;
-                    })}
-                  </ul>
+                  <Info host={host} />
                 </Popup>
               </Marker>
             );
