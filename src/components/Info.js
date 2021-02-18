@@ -34,7 +34,7 @@ function Info(props) {
 
       {props.host.problems.map((problem) => {
         return <li key={problem.eventid}>
-          <span className='server.err'>{problem.name}</span>
+          <span className='server_err'>{problem.name}</span>
         </li>;
       })}
     </ul>

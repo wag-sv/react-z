@@ -37,10 +37,9 @@ body{
 
 .li-panel {
     background-color:rgb(255, 255, 255);
-    margin: 3px;
-    padding: 3px;
     font-size: small;
     border-radius: 3px;
+    border: none;
     -webkit-box-shadow: 8px 17px 31px -18px rgba(0,0,0,0.58); 
     box-shadow: 8px 17px 31px -18px rgba(0,0,0,0.58);
 }
@@ -52,7 +51,8 @@ body{
 .list {
     border: solid 1px lightgray;
     border-radius: 5px;
-    height: 85vh;
+    height: 60%;
+
 }
 
 .server_name{
@@ -87,11 +87,8 @@ body{
     margin-bottom: 5px;
 }
 
-.text_to_right{
-    text-align: right;
-}
-
 .server_list_tittle{
+    margin: 0;
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
     font-weight: 700;
@@ -99,8 +96,17 @@ body{
 }
 
 .server_list_ip{
+    margin: 0;
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
     font-weight: 500;
     color: rgb(70, 70, 70);
+}
+
+p{
+    margin: 0;
+}
+
+.server_card{
+    height: 42px;
 }

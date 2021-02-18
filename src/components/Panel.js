@@ -15,16 +15,16 @@ class Panel extends React.Component {
             />
           </div>
         </form>
-        <div className="container">
-          <div className="list">
+        <div className="container h-100">
+          <div className="list overflow-auto">
             <ul className="ul-panel">
               {this.props.filteredHosts.map((host) => {
                 return (
-                  <li key={host.hostid} className="d-flex flex-row li-panel span-list justify-content-between mb-2">
-                    <div className="ml-2 d-inline-flex justify-content-start text-truncate">
+                  <li key={host.hostid} className="server_card d-flex flex-row li-panel span-list justify-content-between mb-3 align-items-center">
+                    <div className="ml-2 justify-content-start text-truncate">
                       <p className='text-truncate server_list_tittle'>{host.name} </p>
                     </div>
-                    <div className='d-flex justify-content-end ml-2'>
+                    <div className='d-flex justify-content-end mx-2'>
                       <p className='server_list_ip'>{host.interfaces[0].ip}</p>
                     </div>
                   </li>
