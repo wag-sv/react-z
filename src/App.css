@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;500;700;900&display=swap');
+
+body{
+    font-family: 'Raleway', sans-serif;
+}
+
 #map {
     height: 100vh;
 }
 
 #panel {
-    width: 350px;
+    width: 30%;
     height: 100vh;
     background-color: rgba(255, 255, 255, 0.9);
     position: absolute;
@@ -11,6 +17,12 @@
     right: 0;
     z-index: 499;
     padding-top: 30px;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 6.0px );
+    -webkit-backdrop-filter: blur( 6.0px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );      
 }
 
 .ul-popup {
@@ -24,12 +36,13 @@
 }
 
 .li-panel {
-    background-color:rgba(0, 0, 0, 0.05);
+    background-color:rgb(255, 255, 255);
     margin: 3px;
     padding: 3px;
-    font-family: "Lucida Console", "Courier New", monospace;
     font-size: small;
     border-radius: 3px;
+    -webkit-box-shadow: 8px 17px 31px -18px rgba(0,0,0,0.58); 
+    box-shadow: 8px 17px 31px -18px rgba(0,0,0,0.58);
 }
 
 .size-60 {
@@ -40,4 +53,54 @@
     border: solid 1px lightgray;
     border-radius: 5px;
     height: 85vh;
+}
+
+.server_name{
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(62, 91, 255);
+    margin-bottom: 10px;
+}
+
+.server_tittle_infos{
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(110, 110, 110);
+    margin-bottom: 5px;
+}
+
+.server_text_infos{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(27, 27, 27);
+    margin-bottom: 5px;
+}
+
+.server_err{
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    color: rgb(184, 0, 0);
+    margin-bottom: 5px;
+}
+
+.text_to_right{
+    text-align: right;
+}
+
+.server_list_tittle{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(62, 91, 255);
+}
+
+.server_list_ip{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(70, 70, 70);
 }
