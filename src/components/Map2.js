@@ -1,11 +1,29 @@
 import React, { Component } from "react";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Map from "./components/Map";
-const Z = require("zabbix-rpc");
+import Z from "zabbix-rpc";
+import L, { icon } from "leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
+import Panel from "./Panel";
+import Info from "./Info";
+import greenMarker from "../img/greenMarker.png";
+import greyMarker from "../img/greyMarker.png";
+import blueMarker from "../img/blueMarker.png";
+import yellowMarker from "../img/yellowMarker.png";
+import orangeMarker from "../img/orangeMarker.png";
+import redMarker from "../img/redMarker.png";
+import blackMarker from "../img/blackMarker.png";
 
-class App extends Component {
+class Map extends Component {
   state = {
+    position: [-20.464615419359156, -54.61627937784175],
+    zoom: 12,
+    scrollWheelZoom: true,
+    dynamicMarkers: [],
     auth: "",
     hosts: [],
     filteredHosts: [],
@@ -13,6 +31,61 @@ class App extends Component {
   };
 
   intervalId = 0;
+
+  greenMarker = L.icon({
+    iconUrl: greenMarker,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40],
+  });
+
+  greyMarker = L.icon({
+    iconUrl: greyMarker,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40],
+  });
+
+  blueMarker = L.icon({
+    iconUrl: blueMarker,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40],
+  });
+
+  yellowMarker = L.icon({
+    iconUrl: yellowMarker,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40],
+  });
+
+  orangeMarker = L.icon({
+    iconUrl: orangeMarker,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40],
+  });
+
+  redMarker = L.icon({
+    iconUrl: redMarker,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40],
+  });
+
+  blackMarker = L.icon({
+    iconUrl: blackMarker,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40],
+  });
+
+  // addMarker = (event) => {
+  //   let markers = this.dynamicMarkers;
+  //   markers.push(event);
+  //   this.setState({ dynamicMarkers: markers });
+  // };
 
   zabbix = new Z("177.53.204.46/zabbix");
 
@@ -194,12 +267,89 @@ class App extends Component {
     });
   };
 
+  // handleClick = (e) => {
+  //   const { lat, lng } = e.latlng;
+  //   console.log(lat, lng);
+  // };
+
   render() {
+    console.log(this.state.hosts);
+    const MyComponent = () => {
+      const map = useMapEvents({
+        click: (event) => {
+          L.marker(
+            [event.latlng.lat, event.latlng.lng],
+            {
+              icon: this.greenMarker,
+            },
+            { draggable: true, title: "Hover Text", opacity: 0.5 }
+          )
+            .addTo(map)
+            .bindPopup(`${event.latlng.lat}, ${event.latlng.lng}`)
+            .openPopup();
+        },
+      });
+      return null;
+    };
     return (
       <React.Fragment>
-        <Map
+        <MapContainer
+          id="map"
+          center={this.state.position}
+          zoom={this.state.zoom}
+          scrollWheelZoom={this.state.scrollWheelZoom}
+          doubleClickZoom={true}
+          onclick={this.handleClick}
+        >
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <MyComponent />
+          {this.state.filteredHosts.map((host) => {
+            let iconColor = this.greyMarker;
+
+            switch (host.problemSeverity) {
+              case "0":
+                iconColor = this.greyMarker;
+                break;
+              case "1":
+                iconColor = this.blueMarker;
+                break;
+              case "2":
+                iconColor = this.yellowMarker;
+                break;
+              case "3":
+                iconColor = this.orangeMarker;
+                break;
+              case "4":
+                iconColor = this.redMarker;
+                break;
+              case "5":
+                iconColor = this.blackMarker;
+                break;
+              default:
+                iconColor = this.greenMarker;
+            }
+            return (
+              <Marker
+                key={host.hostid}
+                position={[
+                  host.inventory.location_lat,
+                  host.inventory.location_lon,
+                ]}
+                icon={iconColor}
+              >
+                <Popup>
+                  <Info host={host} />
+                </Popup>
+              </Marker>
+            );
+          })}
+        </MapContainer>
+        <Panel
           filteredHosts={this.state.filteredHosts}
-          input={this.state.input}
+          input={this.input}
           handleSearch={this.handleSearch}
           createHost={this.createHost}
         />
@@ -208,4 +358,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Map;

@@ -32,12 +32,18 @@
     border-radius: 3px;
 }
 
-.size-60 {
+.div-w60pc {
     width: 60%;
 }
 
 .list {
     border: solid 1px lightgray;
     border-radius: 5px;
-    height: 85vh;
+    max-height: 50vh;
 }
+
+.div-h60vh {
+    max-height: 60vh;
+}
+ 
+  
