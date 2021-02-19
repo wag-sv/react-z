@@ -11,7 +11,7 @@ class Panel extends Component {
     longitude: "",
   };
 
-  zabbixApiUrl = "https://177.53.204.46/zabbix/api_jsonrpc.php";
+  zabbixApiUrl = "http://177.53.204.46/zabbix/api_jsonrpc.php";
   zabbixApiHeaders = {
     headers: {
       "Content-Type": "application/json",
