@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Map from "./components/Map";
-const Z = require("zabbix-rpc");
+import Panel from "./components/Panel";
+import AddButton from "./components/AddButton";
+import axios from "axios";
 
 class App extends Component {
   state = {
@@ -10,79 +12,125 @@ class App extends Component {
     hosts: [],
     filteredHosts: [],
     input: "",
+    toggle: false,
   };
 
   intervalId = 0;
 
-  zabbix = new Z("177.53.204.46/zabbix");
-
-  zabbixLogin = () => {
-    return this.zabbix.call({
-      jsonrpc: 2.0,
-      method: "user.login",
-      params: {
-        user: "IronMonitor",
-        password: "IronMonitor",
-      },
-      id: 1,
-    });
+  zabbixApiUrl = "http://177.53.204.46/zabbix/api_jsonrpc.php";
+  zabbixApiHeaders = {
+    headers: {
+      "Content-Type": "application/json",
+    },
   };
 
-  getHosts = () => {
-    return this.zabbix.call({
-      jsonrpc: 2.0,
-      method: "host.get",
-      params: {
-        output: ["host", "name", "status"],
-        selectInventory: ["location_lat", "location_lon"],
-        selectInterfaces: ["interfaceid", "ip"],
-        selectTriggers: [],
-      },
-      auth: this.state.auth,
-      id: 2,
-    });
+  zabbixLogin = async () => {
+    try {
+      const response = await axios.post(
+        this.zabbixApiUrl,
+        {
+          jsonrpc: 2.0,
+          method: "user.login",
+          params: {
+            user: "IronMonitor",
+            password: "IronMonitor",
+          },
+          id: 1,
+        },
+        this.zabbixApiHeaders
+      );
+
+      return response.data.result;
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  getItems = () => {
-    return this.zabbix.call({
-      jsonrpc: 2.0,
-      method: "item.get",
-      params: {
-        filter: { key_: ["icmpping", "icmppingloss", "icmppingsec"] },
-        output: [
-          "key_",
-          "hostid",
-          "name",
-          "lastclock",
-          "lastns",
-          "lastvalue",
-          "prevvalue",
-        ],
-        monitored: true,
-      },
-      auth: this.state.auth,
-      id: 3,
-    });
+  getHosts = async () => {
+    try {
+      const response = await axios.post(
+        this.zabbixApiUrl,
+        {
+          jsonrpc: 2.0,
+          method: "host.get",
+          params: {
+            output: ["host", "name", "status"],
+            selectInventory: ["location_lat", "location_lon"],
+            selectInterfaces: ["interfaceid", "ip"],
+            selectTriggers: [],
+          },
+          auth: this.state.auth,
+          id: 2,
+        },
+        this.zabbixApiHeaders
+      );
+
+      return response.data.result;
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  getProblems = () => {
-    return this.zabbix.call({
-      jsonrpc: 2.0,
-      method: "problem.get",
-      params: {
-        output: [
-          "eventid",
-          "objectid",
-          "clock",
-          "ns",
-          "name",
-          "severity",
-          "opdata",
-        ],
-      },
-      auth: this.state.auth,
-      id: 4,
-    });
+  getItems = async () => {
+    try {
+      const response = await axios.post(
+        this.zabbixApiUrl,
+
+        {
+          jsonrpc: 2.0,
+          method: "item.get",
+          params: {
+            filter: { key_: ["icmpping", "icmppingloss", "icmppingsec"] },
+            output: [
+              "key_",
+              "hostid",
+              "name",
+              "lastclock",
+              "lastns",
+              "lastvalue",
+              "prevvalue",
+            ],
+            monitored: true,
+          },
+          auth: this.state.auth,
+          id: 3,
+        },
+        this.zabbixApiHeaders
+      );
+      return response.data.result;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  getProblems = async () => {
+    try {
+      const response = await axios.post(
+        this.zabbixApiUrl,
+
+        {
+          jsonrpc: 2.0,
+          method: "problem.get",
+          params: {
+            output: [
+              "eventid",
+              "objectid",
+              "clock",
+              "ns",
+              "name",
+              "severity",
+              "opdata",
+            ],
+          },
+          auth: this.state.auth,
+          id: 4,
+        },
+        this.zabbixApiHeaders
+      );
+      return response.data.result;
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   handleData = async () => {
@@ -157,52 +205,23 @@ class App extends Component {
     this.setState({ input: value });
   };
 
-  createHost = () => {
-    this.zabbix.call({
-      jsonrpc: "2.0",
-      method: "host.create",
-      params: {
-        host: "Iron server",
-        interfaces: [
-          {
-            type: 1,
-            main: 1,
-            useip: 1,
-            ip: "186.192.90.12",
-            dns: "",
-            port: "10050",
-          },
-        ],
-        groups: [
-          {
-            groupid: "17",
-          },
-        ],
-        templates: [
-          {
-            templateid: "10186",
-          },
-        ],
-        inventory_mode: 0,
-        inventory: {
-          location_lat: "-20.497727116736",
-          location_lon: "-54.614331421148",
-        },
-      },
-      auth: this.state.auth,
-      id: 5,
-    });
+  handleClick = () => {
+    const toggle = !this.state.toggle;
+    this.setState({ toggle: toggle });
   };
 
   render() {
     return (
       <React.Fragment>
-        <Map
+        <Map filteredHosts={this.state.filteredHosts} />
+        <Panel
           filteredHosts={this.state.filteredHosts}
           input={this.state.input}
           handleSearch={this.handleSearch}
-          createHost={this.createHost}
+          toggle={this.state.toggle}
+          auth={this.state.auth}
         />
+        <AddButton handleClick={this.handleClick} toggle={this.state.toggle} />
       </React.Fragment>
     );
   }

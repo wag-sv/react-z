@@ -1,21 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;500;700;900&display=swap');
+
+body{
+    font-family: 'Raleway', sans-serif;
+    width: 100%;
+    height: 100%;
+}
+
 #map {
     height: 100vh;
 }
 
-#panel {
-    width: 350px;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.9);
+#div-logo {
+    width: 220px;
+    height: 110px;
     position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 499;
-    padding-top: 30px;
+    top: 7px;
+    left: 7px;
+    z-index: 1111;
+    background-color: white;
+    border-radius: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.ul-popup {
-    padding: 0px;
-    list-style-type:none;
+#logo {
+    width: 210px;
+}
+
+#panel {
+    width: 400px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 499;
+    padding: 30px 15px;
+    /* background: rgba( 255, 255, 255, 0.25 ); */
+    /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); */
+    backdrop-filter: blur( 3.0px );
+    -webkit-backdrop-filter: blur( 6.0px );
+    /* border-radius: 10px; */
+    border: 1px solid rgba( 255, 255, 255, 0.18 );      
+}
+
+#add-button {
+
+    position: absolute;
+    bottom: 15px;
+    right: 415px;
+    z-index: 499;
+    /* background: rgba( 255, 255, 255, 0.25 ); */
+    /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); */
+    backdrop-filter: blur( 3.0px );
+    -webkit-backdrop-filter: blur( 6.0px );
+    /* border-radius: 10px; */
+    border: 1px solid rgba( 255, 255, 255, 0.18 );      
+}
+
+.panel-content {
+    height: 75vh;
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+    padding: 15px 10px 5px;
+    
+}
+
+/* .input-box {
+    border: none;
+    height: 12%;
+} */
+
+.list-box {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    height:88%;
+}
+
+.list {
+    height:100%;
 }
 
 .ul-panel {
@@ -24,26 +89,109 @@
 }
 
 .li-panel {
-    background-color:rgba(0, 0, 0, 0.05);
-    margin: 3px;
-    padding: 3px;
-    font-family: "Lucida Console", "Courier New", monospace;
+    background-color:rgb(0, 0, 0, 0.05);
     font-size: small;
     border-radius: 3px;
+    border: none;
+    /* -webkit-box-shadow: 8px 17px 31px -18px rgba(0,0,0,0.58); 
+    box-shadow: 8px 17px 31px -18px rgba(0,0,0,0.58); */
 }
 
-.div-w60pc {
-    width: 60%;
+.li-remove {
+    width: "20px";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+}
+.li-icon {
+    width: 12px;
+    cursor: pointer;
 }
 
-.list {
-    border: solid 1px lightgray;
-    border-radius: 5px;
-    max-height: 50vh;
+.ul-popup {
+    padding: 0px;
+    list-style-type:none;
 }
 
-.div-h60vh {
-    max-height: 60vh;
+
+.server_name{
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(62, 91, 255);
+    margin-bottom: 10px;
 }
- 
-  
+
+.server_tittle_infos{
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(110, 110, 110);
+    margin-bottom: 5px;
+}
+
+.server_text_infos{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(27, 27, 27);
+    margin-bottom: 5px;
+}
+
+.server_err{
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    color: rgb(184, 0, 0);
+    margin-bottom: 5px;
+}
+
+.server_list_tittle{
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(62, 91, 255);
+}
+
+.server_list_ip{
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(70, 70, 70);
+}
+
+p{
+    margin: 0;
+}
+
+.server_card{
+    height: 42px;
+}
+
+
+#style-7::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+#style-7::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-7::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-image: -webkit-gradient(linear,
+									   left bottom,
+									   left top,
+									   color-stop(0.44, rgb(122,153,217)),
+									   color-stop(0.72, rgb(73,125,189)),
+									   color-stop(0.86, rgb(28,58,148)));
+}

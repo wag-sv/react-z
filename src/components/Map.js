@@ -9,7 +9,7 @@ import {
   LayerGroup,
   useMapEvents,
 } from "react-leaflet";
-import Panel from "./Panel";
+import Logo from "./Logo";
 import Info from "./Info";
 import green from "../img/greenMarker.png";
 import grey from "../img/greyMarker.png";
@@ -18,7 +18,9 @@ import yellow from "../img/yellowMarker.png";
 import orange from "../img/orangeMarker.png";
 import red from "../img/redMarker.png";
 import black from "../img/blackMarker.png";
-import { Component } from "react";
+
+let dynamicMarker = L.marker();
+let showDynamicMarker = false;
 
 function Map(props) {
   const greenMarker = L.icon({
@@ -70,8 +72,8 @@ function Map(props) {
     popupAnchor: [0, -40],
   });
 
-  let dynamicMarker = L.marker();
-  let showDynamicMarker = false;
+  // let dynamicMarker = L.marker();
+  // let showDynamicMarker = false;
 
   const AddDynamicMarker = () => {
     const map = useMapEvents({
@@ -102,6 +104,7 @@ function Map(props) {
         scrollWheelZoom={true}
         doubleClickZoom={true}
       >
+        <Logo />
         <LayersControl position="bottomleft">
           <LayersControl.BaseLayer checked name="OpenStreetMap">
             <TileLayer
@@ -168,12 +171,6 @@ function Map(props) {
 
         <AddDynamicMarker />
       </MapContainer>
-      <Panel
-        filteredHosts={props.filteredHosts}
-        input={props.input}
-        handleSearch={props.handleSearch}
-        createHost={props.createHost}
-      />
     </React.Fragment>
   );
 }
