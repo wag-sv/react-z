@@ -17,10 +17,10 @@ class App extends Component {
 
   intervalId = 0;
 
-  zabbixApiUrl = "https://177.53.204.46/zabbix/api_jsonrpc.php";
+  zabbixApiUrl = "http://177.53.204.46/zabbix/api_jsonrpc.php";
   zabbixApiHeaders = {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json-rpc",
     },
   };
 
@@ -28,7 +28,7 @@ class App extends Component {
     try {
       const response = await axios.post(
         this.zabbixApiUrl,
-        {
+        JSON.stringify({
           jsonrpc: 2.0,
           method: "user.login",
           params: {
@@ -36,7 +36,7 @@ class App extends Component {
             password: "IronMonitor",
           },
           id: 1,
-        },
+        }),
         this.zabbixApiHeaders
       );
 
@@ -50,7 +50,7 @@ class App extends Component {
     try {
       const response = await axios.post(
         this.zabbixApiUrl,
-        {
+        JSON.stringify({
           jsonrpc: 2.0,
           method: "host.get",
           params: {
@@ -61,7 +61,7 @@ class App extends Component {
           },
           auth: this.state.auth,
           id: 2,
-        },
+        }),
         this.zabbixApiHeaders
       );
 
@@ -75,8 +75,7 @@ class App extends Component {
     try {
       const response = await axios.post(
         this.zabbixApiUrl,
-
-        {
+        JSON.stringify({
           jsonrpc: 2.0,
           method: "item.get",
           params: {
@@ -94,7 +93,7 @@ class App extends Component {
           },
           auth: this.state.auth,
           id: 3,
-        },
+        }),
         this.zabbixApiHeaders
       );
       return response.data.result;
@@ -107,8 +106,7 @@ class App extends Component {
     try {
       const response = await axios.post(
         this.zabbixApiUrl,
-
-        {
+        JSON.stringify({
           jsonrpc: 2.0,
           method: "problem.get",
           params: {
@@ -124,7 +122,7 @@ class App extends Component {
           },
           auth: this.state.auth,
           id: 4,
-        },
+        }),
         this.zabbixApiHeaders
       );
       return response.data.result;

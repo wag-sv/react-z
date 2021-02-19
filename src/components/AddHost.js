@@ -11,10 +11,10 @@ class Panel extends Component {
     longitude: "",
   };
 
-  zabbixApiUrl = "https://177.53.204.46/zabbix/api_jsonrpc.php";
+  zabbixApiUrl = "http://177.53.204.46/zabbix/api_jsonrpc.php";
   zabbixApiHeaders = {
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json-rpc",
     },
   };
 
@@ -29,7 +29,7 @@ class Panel extends Component {
       const response = await axios
         .post(
           this.zabbixApiUrl,
-          {
+          JSON.stringify({
             jsonrpc: 2.0,
             method: "host.create",
             params: {
@@ -62,7 +62,7 @@ class Panel extends Component {
             },
             auth: this.props.auth,
             id: 5,
-          },
+          }),
           this.zabbixApiHeaders
         )
         .then(() => {
