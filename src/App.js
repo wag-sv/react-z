@@ -17,10 +17,11 @@ class App extends Component {
 
   intervalId = 0;
 
-  zabbixApiUrl = "https://177.53.204.46/zabbix/api_jsonrpc.php";
+  zabbixApiUrl =
+    "https://dinfras2.campogrande.ms.gov.br/zabbix/api_jsonrpc.php";
   zabbixApiHeaders = {
     headers: {
-      "Content-Type": "application/json-rpc",
+      "Content-Type": "application/json",
     },
   };
 
