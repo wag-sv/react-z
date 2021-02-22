@@ -21,7 +21,7 @@ _Re.mo_ is an application that uses Zabbix API to display information of server/
 > It was created as the study subject of a webdev course;
 
 1. Fork it
-2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
 5. Create a new Pull Request
