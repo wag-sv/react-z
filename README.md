@@ -2,7 +2,7 @@
 
 _Re.mo_ displays information of server/ host/ website & devices connection status on a map.
 
-> Click [HERE](https://quirky-darwin-9bc6cc.netlify.app/) to test it!
+> Click [HERE](https://re-mo.netlify.app/) to test it!
 > Presentation link, [CLICK HERE](https://docs.google.com/presentation/d/1n8GEU9KUyB0C7OId73FIIXhWKsLTFVzsdYZiaU74FuA/edit?usp=sharing)
 
 ## INSTALLATION
